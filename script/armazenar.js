@@ -67,9 +67,9 @@
 
          if(despesa.validarDados()){
             bd.gravar(despesa);
-            alert('Nova despesa cadastrada com sucesso');
+            $("#sucessoGravacao").modal('show')
         }else{
-            alert('Porfavor preencher todos os dados');
+            $("#erroGravacao").modal('show')
         }
 
 
