@@ -21,36 +21,7 @@
         }
 
     }
-    class Bd {
-
-        constructor(){
-            //recupear o valor da key id do local storage
-            let id = localStorage.getItem('id')
-            //se essa key não existir adicione uma de valor 0
-            if(id === null){
-                localStorage.setItem('id',0)
-            }
-            
-        }
-
-
-        getNextId() {
-            //recupera o id de localStorage e retorna o proximo valor
-            let proximoId = localStorage.getItem("id")
-            return parseInt(proximoId) + 1
-        }
-        //sempre que um novo item for adicionado ele sera adicionado no localStorage com a key sendo o valor de ID, o valor de ID tera seu valor somado em 1, fazendo com que nunca aja uma sobreposição de objetos 
-        gravar(d){
-            
-            let id = this.getNextId()
-            localStorage.setItem(id,JSON.stringify(d))
-
-            localStorage.setItem('id',id)
-        }
-    }
-
-    let bd = new Bd();
-
+    let bd = new dataBase();
 
     let btn = document.querySelector("#btn");
     btn.addEventListener('click',cadastrarDespesa)
@@ -64,18 +35,39 @@
         let descricao = document.querySelector("#descricao");
         let valor = document.querySelector("#valor");
         let despesa = new Despesa(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
+        
 
-         if(despesa.validarDados()){
+        
+        if(despesa.validarDados()){
             bd.gravar(despesa);
-            $("#sucessoGravacao").modal('show')
+            ano.value = '';
+            mes.value = '';
+            dia.value = '';
+            tipo.value = '';
+            descricao.value = '';
+            valor.value = '';
+            modalContent('text-success','btn-success','Voltar','Success','Despesa cadastrada com sucesso');
         }else{
-            $("#erroGravacao").modal('show')
-        }
+            modalContent('text-danger','btn-danger','Voltar e corrigir','Error','Existem campos obrigatorios que não foram preenchidos.');
+        } 
 
 
     }
 
+    function modalContent(tituloCor,btnCor,btnContent,tituloContent,Content){
+        let modalTituloCor = document.querySelector("#modalTituloCor");
+        let modalTitulo = document.querySelector("#modalTitulo");
+        let modalConteudo = document.querySelector("#modalConteudo");
+        let modalBtn = document.querySelector("#modalBtn");
 
+        modalTituloCor.className = tituloCor + ' modal-header';
+        modalBtn.className = btnCor + ' btn';
+        modalBtn.textContent = btnContent;
 
+        modalTitulo.innerHTML = tituloContent;
+        modalConteudo.textContent = Content;
+        $("#modalRegistraDespesa").modal('show');
+    }
+    
 
 })()
