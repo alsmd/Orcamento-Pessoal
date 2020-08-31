@@ -20,6 +20,7 @@ class dataBase{
     gravar(d){
         
         let id = this.getNextId()
+        d.id = id;
         localStorage.setItem(id,JSON.stringify(d))
 
         localStorage.setItem('id',id)
