@@ -36,16 +36,13 @@
         let valor = document.querySelector("#valor");
         let despesa = new Despesa(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
         
-
-        
         if(despesa.validarDados()){
+            let a = ['ano','mes','dia','tipo','descricao','valor']
             bd.gravar(despesa);
-            ano.value = '';
-            mes.value = '';
-            dia.value = '';
-            tipo.value = '';
-            descricao.value = '';
-            valor.value = '';
+            for(let i in a ){
+                document.getElementById(a[i]).value = ''
+            }
+            
             modalContent('text-success','btn-success','Voltar','Success','Despesa cadastrada com sucesso');
         }else{
             modalContent('text-danger','btn-danger','Voltar e corrigir','Error','Existem campos obrigatorios que não foram preenchidos.');
