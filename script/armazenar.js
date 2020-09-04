@@ -1,26 +1,7 @@
 
 (function(){
     'use strict'
-    class Despesa{
-        constructor(ano,mes,dia,tipo,descricao,valor){
-            this.ano = ano;
-            this.mes = mes;
-            this.dia = dia;
-            this.tipo = tipo;
-            this.descricao = descricao;
-            this.valor = valor;
-        }
-        validarDados(){
-            let validar = true;
-           for(let i in this){
-               if(this[i] == '' || this[i] == null || this[i] == undefined){
-                    validar = false;
-               }
-           }
-           return validar
-        }
 
-    }
     let bd = new dataBase();
 
     let btn = document.querySelector("#btn");

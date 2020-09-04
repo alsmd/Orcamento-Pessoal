@@ -24,27 +24,7 @@
 
     })
     
-    function converterTipo(tipo){
-        let x;
-        switch(tipo){
-            case '1':
-                x = 'Alimentação'
-                break
-            case '2':
-                x ='Educação'
-                break
-            case '3':
-                x ='Lazer'
-            break
-            case '4':
-                x ='Saúde'
-            break
-            case '5':
-                x ='Transporte'
-            
-        }
-        return x
-    }
+    
 
 
 

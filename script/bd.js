@@ -36,6 +36,72 @@ class dataBase{
         }
         return dispesas;
     }
+    pesquisar(despesa){
+        let filtro = [];
+        let despesas = this.recuperarTodosRegistros();
+
+        despesas.forEach(function(objeto){ //percorre todos objetos presentes no LocalStorage
+            let acess = true;
+            for(let i in objeto){ 
+                if(i != "id"){  // comparação realizada com todos attr, menos id
+                    if(objeto[i] != despesa[i]){ //verifica se o objeto da vez possui todos os atributos como sendo identicos ao selecionado no filtro
+                        acess = false
+                    }
+                }
+               
+            }
+            if(acess === true){ //se todos attr forem compativeis o acesso é liberado e o obj é inserido no filtro que sera redenrizado
+                filtro.push(objeto)
+                
+            }
+
+
+        })
+        return filtro
+        
+    }
 }
 
 
+class Despesa{
+    constructor(ano,mes,dia,tipo,descricao,valor){
+        this.ano = ano;
+        this.mes = mes;
+        this.dia = dia;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+    validarDados(){
+        let validar = true;
+       for(let i in this){
+           if(this[i] == '' || this[i] == null || this[i] == undefined){
+                validar = false;
+           }
+       }
+       return validar
+    }
+
+}
+
+function converterTipo(tipo){
+    let x;
+    switch(tipo){
+        case '1':
+            x = 'Alimentação'
+            break
+        case '2':
+            x ='Educação'
+            break
+        case '3':
+            x ='Lazer'
+        break
+        case '4':
+            x ='Saúde'
+        break
+        case '5':
+            x ='Transporte'
+        
+    }
+    return x
+}

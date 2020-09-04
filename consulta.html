@@ -53,7 +53,7 @@
         <div class="col-md-2">
           <select class="form-control" id="ano">
             <option value="">Ano</option>
-            <option value="2018">2020</option>
+            <option value="2020">2020</option>
           </select>
         </div>
 
@@ -81,7 +81,7 @@
 
         <div class="col-md-6">
           <select class="form-control" id="tipo">
-            <option>Tipo</option>
+            <option value="">Tipo</option>
             <option value="1">Alimentação</option>
             <option value="2">Educação</option>
             <option value="3">Lazer</option>
@@ -101,7 +101,7 @@
         </div>
 
         <div class="col-md-2 d-flex justify-content-end">
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-primary" id="btnFiltrar">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -120,7 +120,7 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id='filtrado'>
 
             </tbody>
           </table>
@@ -130,6 +130,8 @@
     <script src="script/bd.js"></script>
     <script src="script/recuperarDespesa.js"></script>
     <script src="script/removerDespesa.js"></script>
+    <script src="script/filtrarDespesa.js"></script>
+
   </body>	
 
 </html>
