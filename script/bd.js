@@ -49,6 +49,13 @@ class dataBase{
                 despesasFiltradas = despesasFiltradas.filter(d => d[attr] == despesa[attr])
             }
         }
+        return despesasFiltradas;
+    }
+    mostrarDespesas(dispesas){
+        let tabela = document.querySelector("#tabela")
+        tabela.querySelector("tbody").remove();
+        tabela.appendChild(document.createElement("tbody"));
+        inserirItensNaTabela(dispesas)
     }
 }
 
@@ -94,4 +101,23 @@ function converterTipo(tipo){
         
     }
     return x
+}
+
+
+function inserirItensNaTabela(despesas){
+    despesas.forEach(function(d){
+        let tabelaTbody = document.querySelector("#tabela tbody")
+        let row = tabelaTbody.insertRow();
+        let btn = document.createElement("button");
+        btn.innerHTML = 'X'
+        btn.className = 'btn btn-danger'
+        row.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
+        row.insertCell(1).innerHTML = converterTipo(d.tipo);
+        row.insertCell(2).innerHTML = d.descricao;
+        row.insertCell(3).innerHTML = d.valor;
+        row.insertCell(4).appendChild(btn);
+
+        row.className = d.id;
+
+    })
 }
