@@ -38,16 +38,11 @@ class dataBase{
     }
     pesquisar(despesa){
         let despesasFiltradas = this.recuperarTodosRegistros()
-        //ano
-        filtrar('ano');
-        //mes
-        filtrar('mes');
-        //tipo
-        filtrar('tipo');
-        //descricao
-        filtrar('descricao');
-        //valor 
-        filtrar('valor');
+
+        for(let i in despesa){
+            filtrar(i);
+        }
+
         console.log(despesasFiltradas)
         function filtrar(attr){
             if(despesa[attr] != ''){
