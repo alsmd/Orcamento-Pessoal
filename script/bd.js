@@ -37,28 +37,23 @@ class dataBase{
         return dispesas;
     }
     pesquisar(despesa){
-        let filtro = [];
-        let despesas = this.recuperarTodosRegistros();
-
-        despesas.forEach(function(objeto){ //percorre todos objetos presentes no LocalStorage
-            let acess = true;
-            for(let i in objeto){ 
-                if(i != "id"){  // comparação realizada com todos attr, menos id
-                    if(objeto[i] != despesa[i]){ //verifica se o objeto da vez possui todos os atributos como sendo identicos ao selecionado no filtro
-                        acess = false
-                    }
-                }
-               
+        let despesasFiltradas = this.recuperarTodosRegistros()
+        //ano
+        filtrar('ano');
+        //mes
+        filtrar('mes');
+        //tipo
+        filtrar('tipo');
+        //descricao
+        filtrar('descricao');
+        //valor 
+        filtrar('valor');
+        console.log(despesasFiltradas)
+        function filtrar(attr){
+            if(despesa[attr] != ''){
+                despesasFiltradas = despesasFiltradas.filter(d => d[attr] == despesa[attr])
             }
-            if(acess === true){ //se todos attr forem compativeis o acesso é liberado e o obj é inserido no filtro que sera redenrizado
-                filtro.push(objeto)
-                
-            }
-
-
-        })
-        return filtro
-        
+        }
     }
 }
 

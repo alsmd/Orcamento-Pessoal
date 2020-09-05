@@ -17,10 +17,8 @@
         let valor = document.querySelector("#valor").value;
         let bd = new dataBase()
         let despesa = new Despesa(ano,mes,dia,tipo,descricao,valor);
-        let dispesas = bd.pesquisar(despesa)
-        console.log(despesa)
+        bd.pesquisar(despesa)
 
-        console.log(dispesas)
         
 
     }
