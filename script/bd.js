@@ -2,10 +2,10 @@ class dataBase{
 
     constructor(){
         //recupear o valor da key id do local storage
-        let id = localStorage.getItem('id')
+        let id = localStorage.getItem('id');
         //se essa key não existir adicione uma de valor 0
         if(id === null){
-            localStorage.setItem('id',0)
+            localStorage.setItem('id',0);
         }
         
     }
@@ -13,7 +13,7 @@ class dataBase{
 
     getNextId() {
         //recupera o id de localStorage e retorna o proximo valor
-        let proximoId = localStorage.getItem("id")
+        let proximoId = localStorage.getItem("id");
         return parseInt(proximoId) + 1
     }
     //sempre que um novo item for adicionado ele sera adicionado no localStorage com a key sendo o valor de ID, o valor de ID tera seu valor somado em 1, fazendo com que nunca aja uma sobreposição de objetos 
@@ -29,7 +29,7 @@ class dataBase{
         let dispesas = [];
         for(let x = 1;x <= localStorage.getItem('id');x++){
             let dispesa = JSON.parse(localStorage.getItem(x))
-            if(dispesa != null){
+            if(dispesa != null && dispesa != undefined){
                 dispesas.push(dispesa);
             }
             
@@ -45,17 +45,21 @@ class dataBase{
 
         console.log(despesasFiltradas)
         function filtrar(attr){
-            if(despesa[attr] != ''){
+            if(attr == 'descricao' && despesa[attr] != ''){ 
+                let filtro = despesa[attr].toLowerCase();
+                despesasFiltradas = despesasFiltradas.filter(d =>  d[attr].toLowerCase() == filtro )
+            }else if(despesa[attr] != '' && attr != 'descricao' ){
                 despesasFiltradas = despesasFiltradas.filter(d => d[attr] == despesa[attr])
-            }
+            }            
         }
         return despesasFiltradas;
     }
     mostrarDespesas(dispesas){
-        let tabela = document.querySelector("#tabela")
-        tabela.querySelector("tbody").remove();
-        tabela.appendChild(document.createElement("tbody"));
+        document.querySelector("#tabela tbody").innerHTML = '';
         inserirItensNaTabela(dispesas)
+    }
+    remover(id){
+        localStorage.removeItem(id);
     }
 }
 
@@ -106,11 +110,11 @@ function converterTipo(tipo){
 
 function inserirItensNaTabela(despesas){
     despesas.forEach(function(d){
-        let tabelaTbody = document.querySelector("#tabela tbody")
+        let tabelaTbody = document.querySelector("#tabela tbody");
         let row = tabelaTbody.insertRow();
         let btn = document.createElement("button");
-        btn.innerHTML = 'X'
-        btn.className = 'btn btn-danger'
+        btn.className = 'btn btn-danger';
+        btn.innerHTML = 'X';
         row.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
         row.insertCell(1).innerHTML = converterTipo(d.tipo);
         row.insertCell(2).innerHTML = d.descricao;
@@ -120,4 +124,19 @@ function inserirItensNaTabela(despesas){
         row.className = d.id;
 
     })
+}
+
+function modalContent(tituloCor,btnCor,btnContent,tituloContent,Content){
+    let modalTituloCor = document.querySelector("#modalTituloCor");
+    let modalTitulo = document.querySelector("#modalTitulo");
+    let modalConteudo = document.querySelector("#modalConteudo");
+    let modalBtn = document.querySelector("#modalBtn");
+    
+    modalTituloCor.className = tituloCor + ' modal-header';
+    modalBtn.className = btnCor + ' btn';
+    modalBtn.textContent = btnContent;
+
+    modalTitulo.innerHTML = tituloContent;
+    modalConteudo.textContent = Content;
+    $("#modalRegistraDespesa").modal('show');
 }

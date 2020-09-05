@@ -23,7 +23,7 @@
             for(let i in a ){
                 document.getElementById(a[i]).value = ''
             }
-            
+            //formataçoes e visualização do modal
             modalContent('text-success','btn-success','Voltar','Success','Despesa cadastrada com sucesso');
         }else{
             modalContent('text-danger','btn-danger','Voltar e corrigir','Error','Existem campos obrigatorios que não foram preenchidos.');
@@ -32,20 +32,7 @@
 
     }
 
-    function modalContent(tituloCor,btnCor,btnContent,tituloContent,Content){
-        let modalTituloCor = document.querySelector("#modalTituloCor");
-        let modalTitulo = document.querySelector("#modalTitulo");
-        let modalConteudo = document.querySelector("#modalConteudo");
-        let modalBtn = document.querySelector("#modalBtn");
-
-        modalTituloCor.className = tituloCor + ' modal-header';
-        modalBtn.className = btnCor + ' btn';
-        modalBtn.textContent = btnContent;
-
-        modalTitulo.innerHTML = tituloContent;
-        modalConteudo.textContent = Content;
-        $("#modalRegistraDespesa").modal('show');
-    }
+    
     
 
 })()
